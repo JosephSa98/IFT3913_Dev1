@@ -1,5 +1,99 @@
+import java.io.IOException;
+import java.io.RandomAccessFile;
+
 public class FileManager{
-    public static void main(String[] args) {
+
+
+    public static void main(String[] args){
+        String path = "testClass.txt";
+        if(args.length > 1){
+            path = args[1];
+        }
+
+        int linesOfCode = 0;
+        int commentLinesOfCode = 0;
+
+
+        try {
+            RandomAccessFile inputCode = new RandomAccessFile(path, "r");
+            String line;
+            // State 0 : nothing particular
+            // State 1 : just read '/' while not isBlockComment, should look for /* or //
+            // State 2 : just read '*' while isBlockComment, should look for */
+
+            int state = 0;
+            boolean isBlockComment = false;
+            boolean isLiteral = false;
+
+            // To handle lines with, for example
+            // *//*
+            boolean commentLineIncremented;
+
+
+            linesLoop:
+                while((line = inputCode.readLine()) != null){
+                    commentLineIncremented = false;
+
+                    if(line.isBlank())
+                        continue;
+
+                    for(int i = 0; i < line.length(); i++){
+                        if(line.charAt(i) == '/' && !isLiteral) {
+                            switch (state) {
+                                case 0:
+                                    if(!isBlockComment)
+                                        state = 1;
+                                    break;
+                                case 1:
+                                    state = 0;
+                                    commentLinesOfCode++;
+                                    linesOfCode++;
+                                    continue linesLoop;
+                                case 2:
+                                    commentLinesOfCode++;
+                                    commentLineIncremented = true;
+                                    isBlockComment = false;
+                                default:
+                                    state = 0;
+                                    break;
+                            }
+                        }else if(line.charAt(i) == '*' && !isLiteral){
+                            switch (state) {
+                                case 0:
+                                    if(isBlockComment)
+                                        state = 2;
+                                    break;
+                                case 1:
+                                    state = 0;
+                                    isBlockComment = true;
+                                case 2:
+                                    break;
+                                default:
+                                    state = 0;
+                                    break;
+                            }
+                        }else if(line.charAt(i) == '\"'){
+                            // if a line of code is, for example
+                            // System.out.println("///****///")
+                            isLiteral = !isLiteral;
+                        }else{
+                            state = 0;
+                        }
+
+                    }
+                    if(isBlockComment && !commentLineIncremented)
+                        commentLinesOfCode++;
+                    linesOfCode++;
+                    state = 0;
+                }
+            inputCode.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Échec lors de l'accès au fichier");
+        }
+
+        System.out.println("LOC:" + linesOfCode + "; CLOC:" + commentLinesOfCode);
+
         String[] linesOfcode = {"/*hi",
                 "cava*/" ,
                 "bien" ,

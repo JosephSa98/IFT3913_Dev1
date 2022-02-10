@@ -1,0 +1,24 @@
+// comment
+code
+code
+code
+/*multi
+line
+comment
+*/
+code
+code
+System.out.println("///****/////")
+code
+/*
+///////
+*/
+
+
+
+///*
+code
+code
+//*/
+
+Expect 20 LOC and 10 CLOC
