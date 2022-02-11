@@ -20,7 +20,6 @@ public class CSVEntry {
         this.name = name;
         this.LOC = LOC;
         this.CLOC = CLOC;
-        this.DC = DC;
     }
 
     /**
