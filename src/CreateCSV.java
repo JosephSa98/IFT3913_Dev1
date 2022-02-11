@@ -6,7 +6,23 @@ public class CreateCSV {
     LinkedList<CSVEntry> classEntries;
     LinkedList<CSVEntry> packageEntries;
 
-/*APPEL LA FONCTION REPORTCLASSESINPUT() POUR GENERER UN ARRAY CONTENANT LES INFOS*/
+    public LinkedList<CSVEntry> getClassEntries() {
+        return classEntries;
+    }
+
+    public void addClassEntries(CSVEntry classEntries) {
+        this.classEntries.add(classEntries);
+    }
+
+    public LinkedList<CSVEntry> getPackageEntries() {
+        return packageEntries;
+    }
+
+    public void addPackageEntries(CSVEntry packageEntries) {
+        this.packageEntries.add(packageEntries);
+    }
+
+    /*APPEL LA FONCTION REPORTCLASSESINPUT() POUR GENERER UN ARRAY CONTENANT LES INFOS*/
 /*ENSUITE FAIT APPEL A WRITECSVFILE QUI VA ECRIRE DANS LE FICHIER CSV LES INFOS ET LEURS NOMS DE COLOMNES*/
 
 //    public void produceData() {
@@ -28,6 +44,8 @@ public class CreateCSV {
 //        }
 //        return data;
 //    }
+
+
 
     /*ECRIT DANS LE FICHIER CSV LES INFOS RECU PAR PRODUCEDATA()*/
     public static void writeCSVFile(String[] data, boolean append){
