@@ -15,16 +15,26 @@ public class CSVCreater {
         return classEntries;
     }
 
-    public void addClassEntries(CSVEntry classEntries) {
-        this.classEntries.add(classEntries);
+
+    public void addClassEntry(CSVEntry classEntry) {
+        //Calcule du DC pour class
+        double dc = ((double)classEntry.getCLOC())/classEntry.getLOC();
+        classEntry.setDC(dc);
+        this.classEntries.add(classEntry);
+
+
     }
 
     public LinkedList<CSVEntry> getPackageEntries() {
         return packageEntries;
     }
 
-    public void addPackageEntries(CSVEntry packageEntries) {
-        this.packageEntries.add(packageEntries);
+    public void addPackageEntry(CSVEntry packageEntry) {
+
+        //Calcule du DC pour package
+        double dc = ((double)packageEntry.getCLOC())/packageEntry.getLOC();
+        packageEntry.setDC(dc);
+        this.packageEntries.add(packageEntry);
     }
 
     /*APPEL LA FONCTION REPORTCLASSESINPUT() POUR GENERER UN ARRAY CONTENANT LES INFOS*/

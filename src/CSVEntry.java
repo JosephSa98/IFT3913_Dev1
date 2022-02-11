@@ -5,9 +5,9 @@ public class CSVEntry {
     String name;
     int LOC;
     int CLOC;
-    int DC;
+    double DC;
 
-    public CSVEntry(String chemin, String name, int LOC, int CLOC, int DC) {
+    public CSVEntry(String chemin, String name, int LOC, int CLOC, double DC) {
         this.chemin = chemin;
         this.name = name;
         this.LOC = LOC;
@@ -15,7 +15,7 @@ public class CSVEntry {
         this.DC = DC;
     }
 
-    public CSVEntry(int complexityMeasure, double complexityDegree, String chemin, String name, int LOC, int CLOC, int DC) {
+    public CSVEntry(int complexityMeasure, double complexityDegree, String chemin, String name, int LOC, int CLOC, double DC) {
         this.complexityMeasure = complexityMeasure;
         this.complexityDegree = complexityDegree;
         this.chemin = chemin;
@@ -73,11 +73,11 @@ public class CSVEntry {
         this.CLOC = CLOC;
     }
 
-    public int getDC() {
+    public double getDC() {
         return DC;
     }
 
-    public void setDC(int DC) {
+    public void setDC(double DC) {
         this.DC = DC;
     }
 }
