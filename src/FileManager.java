@@ -10,6 +10,8 @@ public class FileManager{
             path = args[1];
         }
 
+        CSVCreater csv = new CSVCreater();
+
         int linesOfCode = 0;
         int commentLinesOfCode = 0;
 

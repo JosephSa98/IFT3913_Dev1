@@ -2,9 +2,14 @@ import javax.swing.*;
 import java.io.*;
 import java.util.LinkedList;
 
-public class CreateCSV {
+public class CSVCreater {
     LinkedList<CSVEntry> classEntries;
     LinkedList<CSVEntry> packageEntries;
+
+    public CSVCreater() {
+        classEntries = new LinkedList<>();
+        packageEntries = new LinkedList<>();
+    }
 
     public LinkedList<CSVEntry> getClassEntries() {
         return classEntries;
