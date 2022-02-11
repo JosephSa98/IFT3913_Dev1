@@ -1,7 +1,10 @@
 import javax.swing.*;
 import java.io.*;
+import java.util.LinkedList;
 
 public class CreateCSV {
+    LinkedList<CSVEntry> classEntries;
+    LinkedList<CSVEntry> packageEntries;
 
 /*APPEL LA FONCTION REPORTCLASSESINPUT() POUR GENERER UN ARRAY CONTENANT LES INFOS*/
 /*ENSUITE FAIT APPEL A WRITECSVFILE QUI VA ECRIRE DANS LE FICHIER CSV LES INFOS ET LEURS NOMS DE COLOMNES*/
