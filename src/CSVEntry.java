@@ -7,12 +7,11 @@ public class CSVEntry {
     int CLOC;
     double DC;
 
-    public CSVEntry(String chemin, String name, int LOC, int CLOC, double DC) {
+    public CSVEntry(String chemin, String name, int LOC, int CLOC) {
         this.chemin = chemin;
         this.name = name;
         this.LOC = LOC;
         this.CLOC = CLOC;
-        this.DC = DC;
     }
 
     public CSVEntry(int complexityMeasure, double complexityDegree, String chemin, String name, int LOC, int CLOC, double DC) {
