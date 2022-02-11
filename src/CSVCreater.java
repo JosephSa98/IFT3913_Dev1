@@ -6,6 +6,7 @@ public class CSVCreater {
     LinkedList<CSVEntry> classEntries;
     LinkedList<CSVEntry> packageEntries;
 
+
     public CSVCreater() {
         classEntries = new LinkedList<>();
         packageEntries = new LinkedList<>();
@@ -61,8 +62,11 @@ public class CSVCreater {
 //    }
 
 
-
-    /*ECRIT DANS LE FICHIER CSV LES INFOS RECU PAR PRODUCEDATA()*/
+    /**
+     * Ecrit dans le fichier CSV les infos recu par la fonction produceData()
+     * @param data
+     * @param append
+     */
     public static void writeCSVFile(String[] data, boolean append){
 
         String csvClassesPath = "CSV/classes.csv";
@@ -94,10 +98,4 @@ public class CSVCreater {
         }
     }
 
-    public static void main (String[] args){
-        /*HARD CODED STRING TO TEST WRITECSVFILE FUNCTION*/
-//        String[] data = {"a","b","c","d","e"};
-//        writeCSVFile(data,true);
-
-    }
 }
