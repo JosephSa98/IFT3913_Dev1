@@ -207,8 +207,8 @@ public class FileManager{
             CSVEntry entry = countSizeClass(file);
             csv.addClassEntry(entry);
         }
+
+        csv.writeCSVFile();
     }
-
-
 }
 

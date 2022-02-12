@@ -1,5 +1,3 @@
-import java.time.LocalDate;
-
 public class CSVEntry {
     private int complexityMeasure;
     private double complexityDegree;
@@ -171,5 +169,23 @@ public class CSVEntry {
      */
     public void setPackageName(String packageName) {
         this.packageName = packageName;
+    }
+
+    /**
+     * Retourne la String correspondant à l'entrée CSV
+     * @return
+     */
+    public String toString(){
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append(complexityMeasure).append(",")
+                .append(complexityDegree).append(",")
+                .append(chemin).append(",")
+                .append(name).append(",")
+                .append(LOC).append(",")
+                .append(CLOC).append(",")
+                .append(DC);
+
+        return stringBuilder.toString();
     }
 }
