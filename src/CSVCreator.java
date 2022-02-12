@@ -52,7 +52,7 @@ public class CSVCreator {
      */
     public String classEntriesToString(){
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("WMC,class_BC,chemin,class,classe_LOC,classe_CLOC,classe_DC\n");
+        stringBuilder.append("WMC;class_BC;chemin;class;classe_LOC;classe_CLOC;classe_DC\n");
         for(CSVEntry entry : classEntries){
             stringBuilder.append(entry.toString()).append("\n");
         }
@@ -66,7 +66,7 @@ public class CSVCreator {
      */
     public String packageEntriesToString(){
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("WCP,paquet_BC,chemin,paquet,paquet_LOC,paquet_CLOC,paquet_DC\n");
+        stringBuilder.append("WCP;paquet_BC;chemin;paquet;paquet_LOC;paquet_CLOC;paquet_DC\n");
         for(CSVEntry entry : packageEntries){
             stringBuilder.append(entry.toString()).append("\n");
         }
@@ -87,10 +87,12 @@ public class CSVCreator {
 
             FileWriter classCsvWriter = new FileWriter(csvClasses);
             classCsvWriter.write(this.classEntriesToString());
+            classCsvWriter.close();
 
 
-            FileWriter packageCsvWriter = new FileWriter(csvClasses);
+            FileWriter packageCsvWriter = new FileWriter(csvPackages);
             packageCsvWriter.write(this.packageEntriesToString());
+            packageCsvWriter.close();
 
         }catch(Exception e){
             System.out.println("Error creating files");

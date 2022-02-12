@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 
+import static java.lang.System.exit;
+
 public class FileManager{
 
     /**
@@ -64,9 +66,11 @@ public class FileManager{
             linesLoop:
             while((line = inputCode.readLine()) != null){
                 if(line.indexOf("public class ") == 0 && !isBlockComment && className.equals("")){
-                    className = line.substring(13).split("\\{")[0];
+                    className = line.substring("public class ".length()).split("\\{")[0];
+                }else if(line.indexOf("public interface ") == 0 && !isBlockComment && className.equals("")){
+                    className = line.substring("public interface ".length()).split("\\{")[0];
                 }else if(line.indexOf("package ") == 0 && !isBlockComment && packageName.equals("")){
-                    packageName = line.substring(8).split(";")[0];
+                    packageName = line.substring("package ".length()).split(";")[0];
                 }
 
                 // Doesn't take into account, for example
@@ -139,7 +143,7 @@ public class FileManager{
             System.out.println("Échec lors de l'accès au fichier");
         }
 
-        System.out.println("className:" + className + "; LOC" + linesOfCode + "; CLOC:" + commentLinesOfCode);
+        // System.out.println("className:" + className + "; LOC" + linesOfCode + "; CLOC:" + commentLinesOfCode);
 
         return new CSVEntry(path.getAbsolutePath(), className, linesOfCode, commentLinesOfCode, false,
                 packageName, WMC);
@@ -191,9 +195,11 @@ public class FileManager{
 
 
     public static void main(String[] args){
+
         String path = "testClass.txt";
-        if(args.length > 1){
-            path = args[1];
+
+        if(args.length > 0){
+            path = args[0];
         }
 
         CSVCreator csv = new CSVCreator();

@@ -1,0 +1,22 @@
+Les trois classes les moins bien documentées selon la métrique classe_BC, en excluant les fichiers .html, sont
+- XYPlot<S extends Comparable<S>> extends Plot, avec un class_BC de 0.00025, ce qui 
+    indique que la densité de commentaires est peu élevé pour la complexité du code. En analysant 
+    le contenu du code, on remarque que ceci est principalement dû à des if répétés 
+    pour des opérations similaires. Ceci rend donc une valeur basse à la métrique
+    car les ifs augmentent la complexité du code (même s'ils sont répétés pour des
+    opérations similaires) et les auteurs n'ont pas pris la peine de documenter ces ifs.
+- CategoryPlot<R extends Comparable<R>, avec un class_BC de 0.00028, contient des sections
+    importantes de code peu commentées. Ce code contient aussi des if répétés.
+- DatasetUtils, avec un class_BC de 0.00033, 
+    comporte les mêmes problèmes que les classes précédentes, c'est-à-dire des sections
+    peu commentées et des if répétés.
+
+
+Les trois paquets les moins bien documentées selon la métrique classe_BC, en excluant les fichiers .html, sont
+- org.jfree.chart.renderer.category, avec un paquet_BC de 0.000106, ce qui indique qu'en moyenne, la densité des commentaires
+    dans ses classes est peu élevé pour la complexité du code. Il faudrait commenter davantage les classes de ce paquet.
+- org.jfree.chart.swing, avec un paquet_BC de 0.000140, ce qui indique qu'en moyenne, la densité des commentaires
+    dans ses classes est peu élevé pour la complexité du code. Il faudrait commenter davantage les classes de ce paquet.
+- org.jfree.data.time, avec un paquet_BC de 0.000143, ce qui indique qu'en moyenne, la densité des commentaires
+    dans ses classes est peu élevé pour la complexité du code. Il faudrait commenter davantage les classes de ce paquet.
+
