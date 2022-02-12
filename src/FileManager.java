@@ -2,15 +2,39 @@ import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
 
 public class FileManager{
+
+
+    public static int countMatches(String subString, String fullString){
+        int count = 0;
+        int matchCounter = 0;
+
+        for(int i = 0; i < fullString.length(); i++){
+            if(fullString.charAt(i) == subString.charAt(matchCounter)){
+                matchCounter++;
+            }
+
+            if(matchCounter == subString.length()){
+                matchCounter = 0;
+                count++;
+            }
+
+        }
+
+
+        return count;
+    }
+
 
     public static CSVEntry countSizeClass(File path){
         int linesOfCode = 0;
         int commentLinesOfCode = 0;
         String className = "";
         String packageName = "";
+        int WMC = 0;
 
         try {
             RandomAccessFile inputCode = new RandomAccessFile(path, "r");
@@ -35,6 +59,15 @@ public class FileManager{
                 }else if(line.indexOf("package ") == 0 && !isBlockComment && packageName.equals("")){
                     packageName = line.substring(8).split(";")[0];
                 }
+
+                // Doesn't take into account, for example
+                // String elseelseelse = "if(while(for(case case case"
+                WMC += countMatches("if(", line);
+                WMC += countMatches("else", line);
+                WMC += countMatches("while(", line);
+                WMC += countMatches("for(", line);
+                WMC += countMatches("case ", line);
+
 
                 commentLineIncremented = false;
 
@@ -89,6 +122,7 @@ public class FileManager{
                     commentLinesOfCode++;
                 linesOfCode++;
                 state = 0;
+
             }
             inputCode.close();
         } catch (IOException e) {
@@ -139,6 +173,41 @@ public class FileManager{
                 basePackageEntry.setCLOC(packageCLOC);
                 basePackageEntry.setName(packageName);
                 basePackageEntry.setChemin(file.getAbsolutePath());
+
+                while(folders.size() > 0){
+                    LinkedList<File> subFolders = new LinkedList<>();
+                    for(File folder : folders){
+                        File[] subFilesArray = folder.listFiles();
+                        assert subFilesArray != null;
+                        subFolders.addAll(Arrays.asList(subFilesArray));
+                        CSVEntry packageEntry = new CSVEntry(true);
+                        packageName = "";
+
+                        packageLOC = 0;
+                        packageCLOC = 0;
+                        for (File f : filesArray) {
+                            if (f.isDirectory()) {
+                                subFolders.add(f);
+                            } else {
+                                CSVEntry entry = countSizeClass(f);
+                                if (packageName.equals("")) {
+                                    packageName = entry.packageName;
+                                }
+                                csv.addClassEntry(entry);
+                                packageCLOC += entry.CLOC;
+                                packageLOC += entry.LOC;
+                            }
+
+                            basePackageEntry.setLOC(packageLOC);
+                            basePackageEntry.setCLOC(packageCLOC);
+                            basePackageEntry.setName(packageName);
+                            basePackageEntry.setChemin(file.getAbsolutePath());
+                        }
+                    }
+
+                    folders = subFolders;
+
+                }
 
                 //TODO: do something recursively (?) with remaining folders in LinkedList folders
             }

@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+
 public class CSVEntry {
     int complexityMeasure;
     double complexityDegree;
@@ -27,38 +29,16 @@ public class CSVEntry {
      * @param CLOC
      * @param isPackage
      * @param packageName
+     * @param complexityMeasure
      */
-    public CSVEntry(String chemin, String name, int LOC, int CLOC, boolean isPackage, String packageName) {
+    public CSVEntry(String chemin, String name, int LOC, int CLOC, boolean isPackage, String packageName, int complexityMeasure) {
         this.chemin = chemin;
         this.name = name;
-        this.LOC = LOC;
-        this.CLOC = CLOC;
+        setLOC(LOC);
+        setCLOC(CLOC);
         this.isPackage = isPackage;
         this.packageName = packageName;
-    }
-
-    /**
-     * Constructeur
-     * @param complexityMeasure
-     * @param complexityDegree
-     * @param chemin
-     * @param name
-     * @param LOC
-     * @param CLOC
-     * @param DC
-     * @param isPackage
-     */
-    public CSVEntry(int complexityMeasure, double complexityDegree, String chemin, String name, int LOC, int CLOC,
-                    double DC, boolean isPackage) {
-        this.complexityMeasure = complexityMeasure;
-        this.complexityDegree = complexityDegree;
-        this.chemin = chemin;
-        this.name = name;
-        this.LOC = LOC;
-        this.CLOC = CLOC;
-        this.DC = DC;
-        this.isPackage = isPackage;
-        this.packageName = "";
+        setComplexityMeasure(complexityMeasure);
     }
 
     /**
@@ -75,6 +55,7 @@ public class CSVEntry {
      */
     public void setComplexityMeasure(int complexityMeasure) {
         this.complexityMeasure = complexityMeasure;
+        this.complexityDegree = DC/complexityMeasure;
     }
 
     /**
@@ -83,14 +64,6 @@ public class CSVEntry {
      */
     public double getComplexityDegree() {
         return complexityDegree;
-    }
-
-    /**
-     * Setter pour le complexity degree
-     * @param complexityDegree
-     */
-    public void setComplexityDegree(double complexityDegree) {
-        this.complexityDegree = complexityDegree;
     }
 
     /**
@@ -168,18 +141,34 @@ public class CSVEntry {
         return DC;
     }
 
+    /**
+     * Getter pour isPackage
+     * @return
+     */
     public boolean isPackage() {
         return isPackage;
     }
 
+    /**
+     * Setter pour isPackage
+     * @param aPackage
+     */
     public void setPackage(boolean aPackage) {
         isPackage = aPackage;
     }
 
+    /**
+     * Getter pour packageName
+     * @return
+     */
     public String getPackageName() {
         return packageName;
     }
 
+    /**
+     * Setter pour packageName
+     * @param packageName
+     */
     public void setPackageName(String packageName) {
         this.packageName = packageName;
     }
