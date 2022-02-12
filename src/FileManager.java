@@ -1,21 +1,24 @@
+import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
+import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class FileManager{
 
-    public static void countSizeClass(String path, CSVCreater csv){
+    public static CSVEntry countSizeClass(File path){
         int linesOfCode = 0;
         int commentLinesOfCode = 0;
         String className = "";
+        String packageName = "";
 
         try {
             RandomAccessFile inputCode = new RandomAccessFile(path, "r");
             String line;
+
             // State 0 : nothing particular
             // State 1 : just read '/' while not isBlockComment, should look for /* or //
             // State 2 : just read '*' while isBlockComment, should look for */
-
-
             int state = 0;
             boolean isBlockComment = false;
             boolean isLiteral = false;
@@ -29,7 +32,10 @@ public class FileManager{
             while((line = inputCode.readLine()) != null){
                 if(line.indexOf("public class ") == 0 && !isBlockComment && className.equals("")){
                     className = line.substring(13).split("\\{")[0];
+                }else if(line.indexOf("package ") == 0 && !isBlockComment && packageName.equals("")){
+                    packageName = line.substring(8).split(";")[0];
                 }
+
                 commentLineIncremented = false;
 
                 if(line.isBlank())
@@ -90,10 +96,9 @@ public class FileManager{
             System.out.println("Échec lors de l'accès au fichier");
         }
 
-        CSVEntry newEntry = new CSVEntry(path, className, linesOfCode, commentLinesOfCode);
-        csv.addClassEntry(newEntry);
-
         System.out.println("className:" + className + "; LOC" + linesOfCode + "; CLOC:" + commentLinesOfCode);
+
+        return new CSVEntry(path.getAbsolutePath(), className, linesOfCode, commentLinesOfCode, false, packageName);
     }
 
 
@@ -103,7 +108,44 @@ public class FileManager{
             path = args[1];
         }
 
-        CSVCreater csv = new CSVCreater();
+        CSVCreator csv = new CSVCreator();
+
+        File file = new File(path);
+
+        if(file.isDirectory()){
+            File[] filesArray = file.listFiles();
+            LinkedList<File> folders = new LinkedList<>();
+            CSVEntry basePackageEntry = new CSVEntry(true);
+            String packageName = "";
+            if(filesArray == null) {
+                System.out.println("Not a directory : " + path);
+            }else {
+                int packageLOC = 0;
+                int packageCLOC = 0;
+                for (File f : filesArray) {
+                    if (f.isDirectory()) {
+                        folders.add(f);
+                    } else {
+                        CSVEntry entry = countSizeClass(f);
+                        if (packageName.equals("")) {
+                            packageName = entry.packageName;
+                        }
+                        csv.addClassEntry(entry);
+                        packageCLOC += entry.CLOC;
+                        packageLOC += entry.LOC;
+                    }
+                }
+                basePackageEntry.setLOC(packageLOC);
+                basePackageEntry.setCLOC(packageCLOC);
+                basePackageEntry.setName(packageName);
+                basePackageEntry.setChemin(file.getAbsolutePath());
+
+                //TODO: do something recursively (?) with remaining folders in LinkedList folders
+            }
+        }else{
+            CSVEntry entry = countSizeClass(file);
+            csv.addClassEntry(entry);
+        }
 
 
 

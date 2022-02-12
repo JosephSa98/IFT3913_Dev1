@@ -6,24 +6,39 @@ public class CSVEntry {
     int LOC;
     int CLOC;
     double DC;
+    boolean isPackage;
+    String packageName;    //not used if isPackage since already contained in name
+
 
     /**
-     * Constructeur ...
+     * Constructeur
+     * @param isPackage
+     */
+    public CSVEntry(boolean isPackage) {
+        this.isPackage = isPackage;
+        packageName = "";
+    }
+
+    /**
+     * Constructeur
      * @param chemin
      * @param name
      * @param LOC
      * @param CLOC
-     * @param DC
+     * @param isPackage
+     * @param packageName
      */
-    public CSVEntry(String chemin, String name, int LOC, int CLOC, double DC) {
+    public CSVEntry(String chemin, String name, int LOC, int CLOC, boolean isPackage, String packageName) {
         this.chemin = chemin;
         this.name = name;
         this.LOC = LOC;
         this.CLOC = CLOC;
+        this.isPackage = isPackage;
+        this.packageName = packageName;
     }
 
     /**
-     * Constructeur...
+     * Constructeur
      * @param complexityMeasure
      * @param complexityDegree
      * @param chemin
@@ -31,8 +46,10 @@ public class CSVEntry {
      * @param LOC
      * @param CLOC
      * @param DC
+     * @param isPackage
      */
-    public CSVEntry(int complexityMeasure, double complexityDegree, String chemin, String name, int LOC, int CLOC, double DC) {
+    public CSVEntry(int complexityMeasure, double complexityDegree, String chemin, String name, int LOC, int CLOC,
+                    double DC, boolean isPackage) {
         this.complexityMeasure = complexityMeasure;
         this.complexityDegree = complexityDegree;
         this.chemin = chemin;
@@ -40,6 +57,8 @@ public class CSVEntry {
         this.LOC = LOC;
         this.CLOC = CLOC;
         this.DC = DC;
+        this.isPackage = isPackage;
+        this.packageName = "";
     }
 
     /**
@@ -120,6 +139,7 @@ public class CSVEntry {
      */
     public void setLOC(int LOC) {
         this.LOC = LOC;
+        DC = ((double) CLOC)/LOC;
     }
 
     /**
@@ -136,6 +156,8 @@ public class CSVEntry {
      */
     public void setCLOC(int CLOC) {
         this.CLOC = CLOC;
+        if(LOC > 0)
+            DC = ((double) CLOC)/LOC;
     }
 
     /**
@@ -146,11 +168,19 @@ public class CSVEntry {
         return DC;
     }
 
-    /**
-     * Setter pour DC
-     * @param DC
-     */
-    public void setDC(double DC) {
-        this.DC = DC;
+    public boolean isPackage() {
+        return isPackage;
+    }
+
+    public void setPackage(boolean aPackage) {
+        isPackage = aPackage;
+    }
+
+    public String getPackageName() {
+        return packageName;
+    }
+
+    public void setPackageName(String packageName) {
+        this.packageName = packageName;
     }
 }

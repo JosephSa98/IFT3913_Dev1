@@ -2,12 +2,12 @@ import javax.swing.*;
 import java.io.*;
 import java.util.LinkedList;
 
-public class CSVCreater {
+public class CSVCreator {
     LinkedList<CSVEntry> classEntries;
     LinkedList<CSVEntry> packageEntries;
 
 
-    public CSVCreater() {
+    public CSVCreator() {
         classEntries = new LinkedList<>();
         packageEntries = new LinkedList<>();
     }
@@ -18,12 +18,7 @@ public class CSVCreater {
 
 
     public void addClassEntry(CSVEntry classEntry) {
-        //Calcule du DC pour class
-        double dc = ((double)classEntry.getCLOC())/classEntry.getLOC();
-        classEntry.setDC(dc);
         this.classEntries.add(classEntry);
-
-
     }
 
     public LinkedList<CSVEntry> getPackageEntries() {
@@ -31,10 +26,6 @@ public class CSVCreater {
     }
 
     public void addPackageEntry(CSVEntry packageEntry) {
-
-        //Calcule du DC pour package
-        double dc = ((double)packageEntry.getCLOC())/packageEntry.getLOC();
-        packageEntry.setDC(dc);
         this.packageEntries.add(packageEntry);
     }
 
