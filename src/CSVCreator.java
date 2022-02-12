@@ -3,8 +3,8 @@ import java.io.*;
 import java.util.LinkedList;
 
 public class CSVCreator {
-    LinkedList<CSVEntry> classEntries;
-    LinkedList<CSVEntry> packageEntries;
+    private LinkedList<CSVEntry> classEntries;
+    private LinkedList<CSVEntry> packageEntries;
 
 
     public CSVCreator() {

@@ -1,15 +1,15 @@
 import java.time.LocalDate;
 
 public class CSVEntry {
-    int complexityMeasure;
-    double complexityDegree;
-    String chemin;
-    String name;
-    int LOC;
-    int CLOC;
-    double DC;
-    boolean isPackage;
-    String packageName;    //not used if isPackage since already contained in name
+    private int complexityMeasure;
+    private double complexityDegree;
+    private String chemin;
+    private String name;
+    private int LOC;
+    private int CLOC;
+    private double DC;
+    private boolean isPackage;
+    private String packageName;    //not used if isPackage since already contained in name
 
 
     /**

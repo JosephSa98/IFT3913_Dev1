@@ -7,7 +7,13 @@ import java.util.LinkedList;
 
 public class FileManager{
 
-
+    /**
+     * Compte le nombre d'occurences de subString dans fullString
+     * Note: if we count "ifi" in "ififi", the result would be 1
+     * @param subString
+     * @param fullString
+     * @return
+     */
     public static int countMatches(String subString, String fullString){
         int count = 0;
         int matchCounter = 0;
@@ -24,17 +30,20 @@ public class FileManager{
 
         }
 
-
         return count;
     }
 
-
+    /**
+     * Parcourt une classe et mesure les métriques
+     * @param path
+     * @return
+     */
     public static CSVEntry countSizeClass(File path){
         int linesOfCode = 0;
         int commentLinesOfCode = 0;
         String className = "";
         String packageName = "";
-        int WMC = 0;
+        int WMC = 1;
 
         try {
             RandomAccessFile inputCode = new RandomAccessFile(path, "r");
@@ -132,7 +141,52 @@ public class FileManager{
 
         System.out.println("className:" + className + "; LOC" + linesOfCode + "; CLOC:" + commentLinesOfCode);
 
-        return new CSVEntry(path.getAbsolutePath(), className, linesOfCode, commentLinesOfCode, false, packageName);
+        return new CSVEntry(path.getAbsolutePath(), className, linesOfCode, commentLinesOfCode, false,
+                packageName, WMC);
+    }
+
+    /**
+     * Parcourt un dossier (package) et mesure les métriques
+     * @param path
+     * @param csv
+     * @return
+     */
+    public static CSVEntry countSizePackage(File path, CSVCreator csv){
+        File[] filesArray = path.listFiles();
+
+        LinkedList<File> folders = new LinkedList<>();
+
+        String packageName = "";
+
+        int packageLOC = 0;
+        int packageCLOC = 0;
+        int WCP = 0;
+
+        assert filesArray != null;
+        for (File f : filesArray) {
+            if (f.isDirectory()) {
+                folders.add(f);
+            } else {
+                CSVEntry entry = countSizeClass(f);
+                if (packageName.equals("")) {
+                    packageName = entry.getPackageName();
+                }
+                csv.addClassEntry(entry);
+                packageCLOC += entry.getCLOC();
+                packageLOC += entry.getLOC();
+                WCP += entry.getComplexityMeasure();
+            }
+        }
+
+        for(File folder : folders){
+            CSVEntry folderEntry = countSizePackage(folder, csv);
+            csv.addPackageEntry(folderEntry);
+            packageLOC += folderEntry.getLOC();
+            packageCLOC += folderEntry.getCLOC();
+            WCP += folderEntry.getComplexityMeasure();
+        }
+
+        return new CSVEntry(path.getAbsolutePath(), packageName, packageLOC, packageCLOC, true, "", WCP);
     }
 
 
@@ -147,131 +201,14 @@ public class FileManager{
         File file = new File(path);
 
         if(file.isDirectory()){
-            File[] filesArray = file.listFiles();
-            LinkedList<File> folders = new LinkedList<>();
-            CSVEntry basePackageEntry = new CSVEntry(true);
-            String packageName = "";
-            if(filesArray == null) {
-                System.out.println("Not a directory : " + path);
-            }else {
-                int packageLOC = 0;
-                int packageCLOC = 0;
-                for (File f : filesArray) {
-                    if (f.isDirectory()) {
-                        folders.add(f);
-                    } else {
-                        CSVEntry entry = countSizeClass(f);
-                        if (packageName.equals("")) {
-                            packageName = entry.packageName;
-                        }
-                        csv.addClassEntry(entry);
-                        packageCLOC += entry.CLOC;
-                        packageLOC += entry.LOC;
-                    }
-                }
-                basePackageEntry.setLOC(packageLOC);
-                basePackageEntry.setCLOC(packageCLOC);
-                basePackageEntry.setName(packageName);
-                basePackageEntry.setChemin(file.getAbsolutePath());
-
-                while(folders.size() > 0){
-                    LinkedList<File> subFolders = new LinkedList<>();
-                    for(File folder : folders){
-                        File[] subFilesArray = folder.listFiles();
-                        assert subFilesArray != null;
-                        subFolders.addAll(Arrays.asList(subFilesArray));
-                        CSVEntry packageEntry = new CSVEntry(true);
-                        packageName = "";
-
-                        packageLOC = 0;
-                        packageCLOC = 0;
-                        for (File f : filesArray) {
-                            if (f.isDirectory()) {
-                                subFolders.add(f);
-                            } else {
-                                CSVEntry entry = countSizeClass(f);
-                                if (packageName.equals("")) {
-                                    packageName = entry.packageName;
-                                }
-                                csv.addClassEntry(entry);
-                                packageCLOC += entry.CLOC;
-                                packageLOC += entry.LOC;
-                            }
-
-                            basePackageEntry.setLOC(packageLOC);
-                            basePackageEntry.setCLOC(packageCLOC);
-                            basePackageEntry.setName(packageName);
-                            basePackageEntry.setChemin(file.getAbsolutePath());
-                        }
-                    }
-
-                    folders = subFolders;
-
-                }
-
-                //TODO: do something recursively (?) with remaining folders in LinkedList folders
-            }
+            CSVEntry entry = countSizePackage(file, csv);
+            csv.addPackageEntry(entry);
         }else{
             CSVEntry entry = countSizeClass(file);
             csv.addClassEntry(entry);
         }
-
-
-
-        String[] linesOfcode = {"/*hi",
-                "cava*/" ,
-                "bien" ,
-                "//et" ,
-                "toi" ,
-                "",
-                "",
-                "//merci",
-                "",
-                "",
-                "",
-                "",
-                "fin"};
-        linesOfCommentInClass(linesOfcode);
-        nonEmptyLinesOfCode(linesOfcode);
     }
 
-    /*
-     * Trouver le CLOC dans la classe
-     * */
-    public static void linesOfCommentInClass(String[] linesOfcode){
-        int comments = 0;
-
-        for (int i = 0; i < linesOfcode.length; i++) {
-            if(linesOfcode[i].contains("/*")){
-                while (!(linesOfcode[i].contains("*/")) && (i < linesOfcode.length - 1)){
-                    comments++;
-                    i++;
-                }
-                if (linesOfcode[i].contains("*/")){
-                    comments++;
-                }
-            }else if (linesOfcode[i].contains("//")){
-                comments++;
-            }
-        }
-        System.out.println("Lines of comment: " + comments);
-    }
-
-    /*
-    * Trouver le nombre de ligne qui ne sont pas vide
-    * */
-    public static void nonEmptyLinesOfCode (String[] linesOfcode){
-        int nonEmptyLines = 0;
-
-        for (int i = 0; i < linesOfcode.length; i++) {
-            if (linesOfcode[i].isBlank()){
-                continue;
-            }else {
-                nonEmptyLines++;
-            }
-        }
-        System.out.println("Number of non empty lines: " + nonEmptyLines);
-    }
 
 }
 
