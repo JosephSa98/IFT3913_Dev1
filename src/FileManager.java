@@ -176,7 +176,7 @@ public class FileManager{
      * @param csv
      * @return
      */
-    public static CSVEntry countSizePackage(File path, CSVCreator csv){
+    public static CSVEntry countSizePackage(File path, CSVCreator csv, String extension){
         File[] filesArray = path.listFiles();
 
         LinkedList<File> folders = new LinkedList<>();
@@ -191,7 +191,7 @@ public class FileManager{
         for (File f : filesArray) {
             if (f.isDirectory()) {
                 folders.add(f);
-            } else {
+            } else if (f.getName().contains("." + extension)){
                 CSVEntry entry = countSizeClass(f);
                 if (packageName.equals("")) {
                     packageName = entry.getPackageName();
@@ -204,7 +204,7 @@ public class FileManager{
         }
 
         for(File folder : folders){
-            CSVEntry folderEntry = countSizePackage(folder, csv);
+            CSVEntry folderEntry = countSizePackage(folder, csv, extension);
             csv.addPackageEntry(folderEntry);
             packageLOC += folderEntry.getLOC();
             packageCLOC += folderEntry.getCLOC();
@@ -218,9 +218,13 @@ public class FileManager{
     public static void main(String[] args){
 
         String path = "testClass.txt";
+        String extension = "";
 
         if(args.length > 0){
             path = args[0];
+        }
+        if(args.length > 1){
+            extension = args[1];
         }
 
         CSVCreator csv = new CSVCreator();
@@ -228,9 +232,9 @@ public class FileManager{
         File file = new File(path);
 
         if(file.isDirectory()){
-            CSVEntry entry = countSizePackage(file, csv);
+            CSVEntry entry = countSizePackage(file, csv, extension);
             csv.addPackageEntry(entry);
-        }else{
+        } else if (file.getName().contains("." + extension)){
             CSVEntry entry = countSizeClass(file);
             csv.addClassEntry(entry);
         }

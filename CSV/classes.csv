@@ -1,5 +1,4 @@
 WMC;class_BC;chemin;class;classe_LOC;classe_CLOC;classe_DC
-5;0.0;C:\Users\guomu\Documents\GitHub\IFT3913_Dev1\codeP4\src\main\java\org\IFT3913_Dev1.jar;;59;0;0.0
 69;0.007684077424375061;C:\Users\guomu\Documents\GitHub\IFT3913_Dev1\codeP4\src\main\java\org\jfree\chart\ChartColor.java;ChartColor extends Color ;149;79;0.5302013422818792
 15;0.06111111111111111;C:\Users\guomu\Documents\GitHub\IFT3913_Dev1\codeP4\src\main\java\org\jfree\chart\ChartElement.java;ChartElement ;48;44;0.9166666666666666
 12;0.07624113475177305;C:\Users\guomu\Documents\GitHub\IFT3913_Dev1\codeP4\src\main\java\org\jfree\chart\ChartElementVisitor.java;ChartElementVisitor ;47;43;0.9148936170212766
@@ -355,7 +354,6 @@ WMC;class_BC;chemin;class;classe_LOC;classe_CLOC;classe_DC
 130;0.002836396641706376;C:\Users\guomu\Documents\GitHub\IFT3913_Dev1\codeP4\src\main\java\org\jfree\chart\renderer\xy\GradientXYBarPainter.java;GradientXYBarPainter;339;125;0.3687315634218289
 198;0.002322330447330447;C:\Users\guomu\Documents\GitHub\IFT3913_Dev1\codeP4\src\main\java\org\jfree\chart\renderer\xy\HighLowRenderer.java;HighLowRenderer extends AbstractXYItemRenderer;448;206;0.45982142857142855
 0;Infinity;C:\Users\guomu\Documents\GitHub\IFT3913_Dev1\codeP4\src\main\java\org\jfree\chart\renderer\xy\package-info.java;;4;3;0.75
-0;NaN;C:\Users\guomu\Documents\GitHub\IFT3913_Dev1\codeP4\src\main\java\org\jfree\chart\renderer\xy\package.html;;6;0;0.0
 111;0.004409815220626031;C:\Users\guomu\Documents\GitHub\IFT3913_Dev1\codeP4\src\main\java\org\jfree\chart\renderer\xy\SamplingXYLineRenderer.java;SamplingXYLineRenderer extends AbstractXYItemRenderer;333;163;0.4894894894894895
 200;0.0022495894909688014;C:\Users\guomu\Documents\GitHub\IFT3913_Dev1\codeP4\src\main\java\org\jfree\chart\renderer\xy\StackedXYAreaRenderer.java;StackedXYAreaRenderer extends XYAreaRenderer;609;274;0.44991789819376027
 208;0.0016578249336870027;C:\Users\guomu\Documents\GitHub\IFT3913_Dev1\codeP4\src\main\java\org\jfree\chart\renderer\xy\StackedXYAreaRenderer2.java;StackedXYAreaRenderer2 extends XYAreaRenderer2;493;170;0.3448275862068966
@@ -485,7 +483,6 @@ WMC;class_BC;chemin;class;classe_LOC;classe_CLOC;classe_DC
 55;0.008897485493230174;C:\Users\guomu\Documents\GitHub\IFT3913_Dev1\codeP4\src\main\java\org\jfree\data\KeyedValues2DItemKey.java;KeyedValues2DItemKey<R extends Comparable<R>, ;141;69;0.48936170212765956
 38;0.01426463354648303;C:\Users\guomu\Documents\GitHub\IFT3913_Dev1\codeP4\src\main\java\org\jfree\data\KeyedValuesItemKey.java;KeyedValuesItemKey<K extends Comparable<K>>;107;58;0.5420560747663551
 93;0.004720692368214005;C:\Users\guomu\Documents\GitHub\IFT3913_Dev1\codeP4\src\main\java\org\jfree\data\KeyToGroupMap.java;KeyToGroupMap<K extends Comparable<K>, G extends Comparable<G>> ;287;126;0.43902439024390244
-2;0.0;C:\Users\guomu\Documents\GitHub\IFT3913_Dev1\codeP4\src\main\java\org\jfree\data\package.html;;6;0;0.0
 146;0.003699276298785216;C:\Users\guomu\Documents\GitHub\IFT3913_Dev1\codeP4\src\main\java\org\jfree\data\Range.java;;424;229;0.5400943396226415
 30;0.030476190476190476;C:\Users\guomu\Documents\GitHub\IFT3913_Dev1\codeP4\src\main\java\org\jfree\data\RangeInfo.java;RangeInfo ;70;64;0.9142857142857143
 15;0.05911949685534591;C:\Users\guomu\Documents\GitHub\IFT3913_Dev1\codeP4\src\main\java\org\jfree\data\RangeType.java;RangeType ;53;47;0.8867924528301887
@@ -499,7 +496,6 @@ WMC;class_BC;chemin;class;classe_LOC;classe_CLOC;classe_DC
 129;0.005004891999698954;C:\Users\guomu\Documents\GitHub\IFT3913_Dev1\codeP4\src\main\java\org\jfree\data\category\DefaultCategoryDataset.java;DefaultCategoryDataset<R extends Comparable<R>, C extends Comparable<C>> ;412;266;0.6456310679611651
 312;0.0015636878844426014;C:\Users\guomu\Documents\GitHub\IFT3913_Dev1\codeP4\src\main\java\org\jfree\data\category\DefaultIntervalCategoryDataset.java;DefaultIntervalCategoryDataset extends AbstractSeriesDataset;742;362;0.48787061994609165
 32;0.028376436781609195;C:\Users\guomu\Documents\GitHub\IFT3913_Dev1\codeP4\src\main\java\org\jfree\data\category\IntervalCategoryDataset.java;IntervalCategoryDataset<R extends Comparable<R>, ;87;79;0.9080459770114943
-3;0.0;C:\Users\guomu\Documents\GitHub\IFT3913_Dev1\codeP4\src\main\java\org\jfree\data\category\package.html;;6;0;0.0
 125;0.004528735632183908;C:\Users\guomu\Documents\GitHub\IFT3913_Dev1\codeP4\src\main\java\org\jfree\data\category\SlidingCategoryDataset.java;SlidingCategoryDataset<R extends Comparable<R>, C extends Comparable<C>> ;348;197;0.5660919540229885
 192;0.0025148809523809525;C:\Users\guomu\Documents\GitHub\IFT3913_Dev1\codeP4\src\main\java\org\jfree\data\flow\DefaultFlowDataset.java;DefaultFlowDataset<K extends Comparable<K>> extends AbstractDataset ;350;169;0.4828571428571429
 55;0.016112342941611235;C:\Users\guomu\Documents\GitHub\IFT3913_Dev1\codeP4\src\main\java\org\jfree\data\flow\FlowDataset.java;FlowDataset<K extends Comparable<K>> extends Dataset ;123;109;0.8861788617886179
@@ -510,11 +506,9 @@ WMC;class_BC;chemin;class;classe_LOC;classe_CLOC;classe_DC
 16;0.05787037037037037;C:\Users\guomu\Documents\GitHub\IFT3913_Dev1\codeP4\src\main\java\org\jfree\data\function\Function2D.java;Function2D ;54;50;0.9259259259259259
 33;0.019784623090408217;C:\Users\guomu\Documents\GitHub\IFT3913_Dev1\codeP4\src\main\java\org\jfree\data\function\LineFunction2D.java;LineFunction2D;121;79;0.6528925619834711
 37;0.016551435156086317;C:\Users\guomu\Documents\GitHub\IFT3913_Dev1\codeP4\src\main\java\org\jfree\data\function\NormalDistributionFunction2D.java;NormalDistributionFunction2D;129;79;0.6124031007751938
-0;NaN;C:\Users\guomu\Documents\GitHub\IFT3913_Dev1\codeP4\src\main\java\org\jfree\data\function\package.html;;6;0;0.0
 35;0.019291819291819293;C:\Users\guomu\Documents\GitHub\IFT3913_Dev1\codeP4\src\main\java\org\jfree\data\function\PolynomialFunction2D.java;PolynomialFunction2D;117;79;0.6752136752136753
 35;0.018654073199527745;C:\Users\guomu\Documents\GitHub\IFT3913_Dev1\codeP4\src\main\java\org\jfree\data\function\PowerFunction2D.java;PowerFunction2D;121;79;0.6528925619834711
 52;0.017427884615384616;C:\Users\guomu\Documents\GitHub\IFT3913_Dev1\codeP4\src\main\java\org\jfree\data\gantt\GanttCategoryDataset.java;GanttCategoryDataset<R extends Comparable<R>, C extends Comparable<C>> ;160;145;0.90625
-2;0.0;C:\Users\guomu\Documents\GitHub\IFT3913_Dev1\codeP4\src\main\java\org\jfree\data\gantt\package.html;;6;0;0.0
 210;0.0025854750328008027;C:\Users\guomu\Documents\GitHub\IFT3913_Dev1\codeP4\src\main\java\org\jfree\data\gantt\SlidingGanttCategoryDataset.java;SlidingGanttCategoryDataset extends AbstractDataset;617;335;0.5429497568881686
 66;0.008667460632526134;C:\Users\guomu\Documents\GitHub\IFT3913_Dev1\codeP4\src\main\java\org\jfree\data\gantt\Task.java;Task;229;131;0.5720524017467249
 65;0.008779264214046822;C:\Users\guomu\Documents\GitHub\IFT3913_Dev1\codeP4\src\main\java\org\jfree\data\gantt\TaskSeries.java;TaskSeries<K extends Comparable<K>> extends Series<K> ;184;105;0.5706521739130435
@@ -537,7 +531,6 @@ WMC;class_BC;chemin;class;classe_LOC;classe_CLOC;classe_DC
 17;0.053817271589486855;C:\Users\guomu\Documents\GitHub\IFT3913_Dev1\codeP4\src\main\java\org\jfree\data\general\KeyedValueDataset.java;KeyedValueDataset extends KeyedValue, Dataset ;47;43;0.9148936170212766
 20;0.045744680851063826;C:\Users\guomu\Documents\GitHub\IFT3913_Dev1\codeP4\src\main\java\org\jfree\data\general\KeyedValues2DDataset.java;KeyedValues2DDataset<R extends Comparable<R>, C extends Comparable<C>> extends CategoryDataset<R, C> ;47;43;0.9148936170212766
 15;0.06046511627906977;C:\Users\guomu\Documents\GitHub\IFT3913_Dev1\codeP4\src\main\java\org\jfree\data\general\KeyedValuesDataset.java;KeyedValuesDataset<K extends Comparable<K>> ;43;39;0.9069767441860465
-1;0.0;C:\Users\guomu\Documents\GitHub\IFT3913_Dev1\codeP4\src\main\java\org\jfree\data\general\package.html;;6;0;0.0
 20;0.044897959183673466;C:\Users\guomu\Documents\GitHub\IFT3913_Dev1\codeP4\src\main\java\org\jfree\data\general\PieDataset.java;PieDataset<K extends Comparable<K>> extends KeyedValues<K>, ;49;44;0.8979591836734694
 98;0.006556468741342691;C:\Users\guomu\Documents\GitHub\IFT3913_Dev1\codeP4\src\main\java\org\jfree\data\general\Series.java;Series<K extends Comparable<K>> ;221;142;0.6425339366515838
 19;0.04446460980036298;C:\Users\guomu\Documents\GitHub\IFT3913_Dev1\codeP4\src\main\java\org\jfree\data\general\SeriesChangeEvent.java;SeriesChangeEvent extends EventObject;58;49;0.8448275862068966
@@ -547,7 +540,6 @@ WMC;class_BC;chemin;class;classe_LOC;classe_CLOC;classe_DC
 16;0.057180851063829786;C:\Users\guomu\Documents\GitHub\IFT3913_Dev1\codeP4\src\main\java\org\jfree\data\general\ValueDataset.java;ValueDataset extends Value, Dataset ;47;43;0.9148936170212766
 76;0.007904376325428958;C:\Users\guomu\Documents\GitHub\IFT3913_Dev1\codeP4\src\main\java\org\jfree\data\general\WaferMapDataset.java;WaferMapDataset extends AbstractDataset ;273;164;0.6007326007326007
 71;0.003786157807057398;C:\Users\guomu\Documents\GitHub\IFT3913_Dev1\codeP4\src\main\java\org\jfree\data\io\CSV.java;CSV ;186;50;0.26881720430107525
-0;NaN;C:\Users\guomu\Documents\GitHub\IFT3913_Dev1\codeP4\src\main\java\org\jfree\data\io\package.html;;6;0;0.0
 54;0.008417508417508417;C:\Users\guomu\Documents\GitHub\IFT3913_Dev1\codeP4\src\main\java\org\jfree\data\json\JSONUtils.java;JSONUtils ;187;85;0.45454545454545453
 0;Infinity;C:\Users\guomu\Documents\GitHub\IFT3913_Dev1\codeP4\src\main\java\org\jfree\data\json\package-info.java;;4;3;0.75
 45;0.011111111111111112;C:\Users\guomu\Documents\GitHub\IFT3913_Dev1\codeP4\src\main\java\org\jfree\data\json\impl\JSONArray.java;JSONArray extends ArrayList;144;72;0.5
@@ -562,7 +554,6 @@ WMC;class_BC;chemin;class;classe_LOC;classe_CLOC;classe_DC
 23;0.03492516037063435;C:\Users\guomu\Documents\GitHub\IFT3913_Dev1\codeP4\src\main\java\org\jfree\data\resources\DataPackageResources_fr.java;DataPackageResources_fr extends ListResourceBundle ;61;49;0.8032786885245902
 25;0.03238095238095238;C:\Users\guomu\Documents\GitHub\IFT3913_Dev1\codeP4\src\main\java\org\jfree\data\resources\DataPackageResources_pl.java;DataPackageResources_pl extends ListResourceBundle ;63;51;0.8095238095238095
 23;0.034635224760501106;C:\Users\guomu\Documents\GitHub\IFT3913_Dev1\codeP4\src\main\java\org\jfree\data\resources\DataPackageResources_ru.java;DataPackageResources_ru extends ListResourceBundle ;59;47;0.7966101694915254
-1;0.0;C:\Users\guomu\Documents\GitHub\IFT3913_Dev1\codeP4\src\main\java\org\jfree\data\resources\package.html;;6;0;0.0
 94;0.004757831711750241;C:\Users\guomu\Documents\GitHub\IFT3913_Dev1\codeP4\src\main\java\org\jfree\data\statistics\BoxAndWhiskerCalculator.java;BoxAndWhiskerCalculator ;199;89;0.4472361809045226
 35;0.025425950196592398;C:\Users\guomu\Documents\GitHub\IFT3913_Dev1\codeP4\src\main\java\org\jfree\data\statistics\BoxAndWhiskerCategoryDataset.java;BoxAndWhiskerCategoryDataset<R extends Comparable<R>, ;218;194;0.8899082568807339
 88;0.005962668510197028;C:\Users\guomu\Documents\GitHub\IFT3913_Dev1\codeP4\src\main\java\org\jfree\data\statistics\BoxAndWhiskerItem.java;BoxAndWhiskerItem;263;138;0.5247148288973384
@@ -576,7 +567,6 @@ WMC;class_BC;chemin;class;classe_LOC;classe_CLOC;classe_DC
 12;0.07371794871794872;C:\Users\guomu\Documents\GitHub\IFT3913_Dev1\codeP4\src\main\java\org\jfree\data\statistics\HistogramType.java;HistogramType ;52;46;0.8846153846153846
 55;0.01097560975609756;C:\Users\guomu\Documents\GitHub\IFT3913_Dev1\codeP4\src\main\java\org\jfree\data\statistics\MeanAndStandardDeviation.java;MeanAndStandardDeviation;164;99;0.6036585365853658
 27;0.03254769921436588;C:\Users\guomu\Documents\GitHub\IFT3913_Dev1\codeP4\src\main\java\org\jfree\data\statistics\MultiValueCategoryDataset.java;MultiValueCategoryDataset<R extends Comparable<R>, C extends Comparable<C>>;66;58;0.8787878787878788
-0;NaN;C:\Users\guomu\Documents\GitHub\IFT3913_Dev1\codeP4\src\main\java\org\jfree\data\statistics\package.html;;6;0;0.0
 88;0.0036845730027548207;C:\Users\guomu\Documents\GitHub\IFT3913_Dev1\codeP4\src\main\java\org\jfree\data\statistics\Regression.java;Regression ;330;107;0.3242424242424242
 83;0.006000837326138531;C:\Users\guomu\Documents\GitHub\IFT3913_Dev1\codeP4\src\main\java\org\jfree\data\statistics\SimpleHistogramBin.java;SimpleHistogramBin;259;129;0.4980694980694981
 160;0.003650442477876106;C:\Users\guomu\Documents\GitHub\IFT3913_Dev1\codeP4\src\main\java\org\jfree\data\statistics\SimpleHistogramDataset.java;SimpleHistogramDataset<K extends Comparable<K>> ;452;264;0.584070796460177
@@ -591,7 +581,6 @@ WMC;class_BC;chemin;class;classe_LOC;classe_CLOC;classe_DC
 165;0.0032738095238095235;C:\Users\guomu\Documents\GitHub\IFT3913_Dev1\codeP4\src\main\java\org\jfree\data\time\Minute.java;Minute extends RegularTimePeriod;448;242;0.5401785714285714
 214;0.002416690267157557;C:\Users\guomu\Documents\GitHub\IFT3913_Dev1\codeP4\src\main\java\org\jfree\data\time\Month.java;Month extends RegularTimePeriod;495;256;0.5171717171717172
 122;0.0036276030128489143;C:\Users\guomu\Documents\GitHub\IFT3913_Dev1\codeP4\src\main\java\org\jfree\data\time\MovingAverage.java;MovingAverage ;296;131;0.44256756756756754
-2;0.0;C:\Users\guomu\Documents\GitHub\IFT3913_Dev1\codeP4\src\main\java\org\jfree\data\time\package.html;;6;0;0.0
 178;0.0030898876404494386;C:\Users\guomu\Documents\GitHub\IFT3913_Dev1\codeP4\src\main\java\org\jfree\data\time\Quarter.java;Quarter extends RegularTimePeriod;440;242;0.55
 266;0.0026138754087434656;C:\Users\guomu\Documents\GitHub\IFT3913_Dev1\codeP4\src\main\java\org\jfree\data\time\RegularTimePeriod.java;RegularTimePeriod;361;251;0.6952908587257618
 171;0.0031189083820662767;C:\Users\guomu\Documents\GitHub\IFT3913_Dev1\codeP4\src\main\java\org\jfree\data\time\Second.java;Second extends RegularTimePeriod;420;224;0.5333333333333333
@@ -613,14 +602,12 @@ WMC;class_BC;chemin;class;classe_LOC;classe_CLOC;classe_DC
 38;0.01591187270501836;C:\Users\guomu\Documents\GitHub\IFT3913_Dev1\codeP4\src\main\java\org\jfree\data\time\ohlc\OHLCItem.java;OHLCItem extends ComparableObjectItem ;129;78;0.6046511627906976
 34;0.020611394163964798;C:\Users\guomu\Documents\GitHub\IFT3913_Dev1\codeP4\src\main\java\org\jfree\data\time\ohlc\OHLCSeries.java;OHLCSeries<S extends Comparable<S>> extends ComparableObjectSeries<S> ;127;89;0.7007874015748031
 149;0.003961801141235254;C:\Users\guomu\Documents\GitHub\IFT3913_Dev1\codeP4\src\main\java\org\jfree\data\time\ohlc\OHLCSeriesCollection.java;OHLCSeriesCollection extends AbstractXYDataset;454;268;0.5903083700440529
-2;0.0;C:\Users\guomu\Documents\GitHub\IFT3913_Dev1\codeP4\src\main\java\org\jfree\data\time\ohlc\package.html;;6;0;0.0
 44;0.013711495116453793;C:\Users\guomu\Documents\GitHub\IFT3913_Dev1\codeP4\src\main\java\org\jfree\data\xml\CategoryDatasetHandler.java;CategoryDatasetHandler extends RootHandler;121;73;0.6033057851239669
 39;0.014925373134328358;C:\Users\guomu\Documents\GitHub\IFT3913_Dev1\codeP4\src\main\java\org\jfree\data\xml\CategorySeriesHandler.java;CategorySeriesHandler extends DefaultHandler;134;78;0.582089552238806
 57;0.009480222294867604;C:\Users\guomu\Documents\GitHub\IFT3913_Dev1\codeP4\src\main\java\org\jfree\data\xml\DatasetReader.java;DatasetReader ;161;87;0.5403726708074534
 14;0.06015037593984962;C:\Users\guomu\Documents\GitHub\IFT3913_Dev1\codeP4\src\main\java\org\jfree\data\xml\DatasetTags.java;DatasetTags ;57;48;0.8421052631578947
 39;0.01511292239769061;C:\Users\guomu\Documents\GitHub\IFT3913_Dev1\codeP4\src\main\java\org\jfree\data\xml\ItemHandler.java;ItemHandler extends DefaultHandler;151;89;0.5894039735099338
 36;0.017336485421591805;C:\Users\guomu\Documents\GitHub\IFT3913_Dev1\codeP4\src\main\java\org\jfree\data\xml\KeyHandler.java;KeyHandler extends DefaultHandler;141;88;0.624113475177305
-0;NaN;C:\Users\guomu\Documents\GitHub\IFT3913_Dev1\codeP4\src\main\java\org\jfree\data\xml\package.html;;6;0;0.0
 42;0.0149547422274695;C:\Users\guomu\Documents\GitHub\IFT3913_Dev1\codeP4\src\main\java\org\jfree\data\xml\PieDatasetHandler.java;PieDatasetHandler extends RootHandler;121;76;0.628099173553719
 33;0.019936204146730464;C:\Users\guomu\Documents\GitHub\IFT3913_Dev1\codeP4\src\main\java\org\jfree\data\xml\RootHandler.java;RootHandler extends DefaultHandler;114;75;0.6578947368421053
 38;0.015574650912996778;C:\Users\guomu\Documents\GitHub\IFT3913_Dev1\codeP4\src\main\java\org\jfree\data\xml\ValueHandler.java;ValueHandler extends DefaultHandler;147;87;0.5918367346938775
@@ -643,7 +630,6 @@ WMC;class_BC;chemin;class;classe_LOC;classe_CLOC;classe_DC
 36;0.020356234096692113;C:\Users\guomu\Documents\GitHub\IFT3913_Dev1\codeP4\src\main\java\org\jfree\data\xy\NormalizedMatrixSeries.java;NormalizedMatrixSeries extends MatrixSeries ;131;96;0.732824427480916
 63;0.009157509157509156;C:\Users\guomu\Documents\GitHub\IFT3913_Dev1\codeP4\src\main\java\org\jfree\data\xy\OHLCDataItem.java;OHLCDataItem;182;105;0.5769230769230769
 40;0.022818791946308724;C:\Users\guomu\Documents\GitHub\IFT3913_Dev1\codeP4\src\main\java\org\jfree\data\xy\OHLCDataset.java;OHLCDataset extends XYDataset ;149;136;0.912751677852349
-3;0.0;C:\Users\guomu\Documents\GitHub\IFT3913_Dev1\codeP4\src\main\java\org\jfree\data\xy\package.html;;6;0;0.0
 23;0.04042715484363082;C:\Users\guomu\Documents\GitHub\IFT3913_Dev1\codeP4\src\main\java\org\jfree\data\xy\TableXYDataset.java;TableXYDataset<S extends Comparable<S>> extends XYDataset<S> ;57;53;0.9298245614035088
 35;0.018412698412698415;C:\Users\guomu\Documents\GitHub\IFT3913_Dev1\codeP4\src\main\java\org\jfree\data\xy\Vector.java;Vector;135;87;0.6444444444444445
 29;0.023872679045092837;C:\Users\guomu\Documents\GitHub\IFT3913_Dev1\codeP4\src\main\java\org\jfree\data\xy\VectorDataItem.java;VectorDataItem extends ComparableObjectItem ;117;81;0.6923076923076923
