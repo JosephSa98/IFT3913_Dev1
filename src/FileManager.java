@@ -45,7 +45,9 @@ public class FileManager{
         int commentLinesOfCode = 0;
         String className = "";
         String packageName = "";
-        int WMC = 1;
+        int WMC = 0;
+        int depth = 0; // depth of "{", when we pass from 1 to 2, we assume we're declaring a new function
+
 
         try {
             RandomAccessFile inputCode = new RandomAccessFile(path, "r");
@@ -66,12 +68,24 @@ public class FileManager{
             linesLoop:
             while((line = inputCode.readLine()) != null){
                 if(line.indexOf("public class ") == 0 && !isBlockComment && className.equals("")){
-                    className = line.substring("public class ".length()).split("\\{")[0];
+                    className = line.substring("public class ".length()).split("\\{")[0]
+                            .split(" implements ")[0];
                 }else if(line.indexOf("public interface ") == 0 && !isBlockComment && className.equals("")){
-                    className = line.substring("public interface ".length()).split("\\{")[0];
+                    className = line.substring("public interface ".length()).split("\\{")[0]
+                            .split(" implements ")[0];
+                }else if(line.indexOf("public abstract class ") == 0 && !isBlockComment && className.equals("")){
+                    className = line.substring("public abstract class ".length()).split("\\{")[0]
+                            .split(" implements ")[0];
+                }else if(line.indexOf("public final class ") == 0 && !isBlockComment && className.equals("")){
+                    className = line.substring("public final class ".length()).split("\\{")[0]
+                            .split(" implements ")[0];
+                }else if(line.indexOf("public enum ") == 0 && !isBlockComment && className.equals("")){
+                    className = line.substring("public enum ".length()).split("\\{")[0]
+                            .split(" implements ")[0];
                 }else if(line.indexOf("package ") == 0 && !isBlockComment && packageName.equals("")){
                     packageName = line.substring("package ".length()).split(";")[0];
                 }
+
 
                 // Doesn't take into account, for example
                 // String elseelseelse = "if(while(for(case case case"
@@ -128,14 +142,21 @@ public class FileManager{
                         isLiteral = !isLiteral;
                     }else{
                         state = 0;
+                        if(!isBlockComment && !isLiteral) {
+                            if (line.charAt(i) == '{') {
+                                if (depth == 1)
+                                    WMC++;
+                                depth++;
+                            } else if (line.charAt(i) == '}') {
+                                depth--;
+                            }
+                        }
                     }
-
                 }
                 if(isBlockComment && !commentLineIncremented)
                     commentLinesOfCode++;
                 linesOfCode++;
                 state = 0;
-
             }
             inputCode.close();
         } catch (IOException e) {

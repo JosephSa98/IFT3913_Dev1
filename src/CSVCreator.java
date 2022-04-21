@@ -79,6 +79,8 @@ public class CSVCreator {
      */
     public void writeCSVFile(){
         try {
+			File dir = new File("CSV");
+			dir.mkdir();
 
             File csvClasses = new File("CSV/classes.csv");
             csvClasses.createNewFile();
