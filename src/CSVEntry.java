@@ -178,12 +178,12 @@ public class CSVEntry {
     public String toString(){
         StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuilder.append(complexityMeasure).append(";")
-                .append(complexityDegree).append(";")
-                .append(chemin).append(";")
-                .append(name).append(";")
-                .append(LOC).append(";")
-                .append(CLOC).append(";")
+        stringBuilder.append(complexityMeasure).append(",")
+                .append(complexityDegree).append(",")
+                .append(chemin).append(",")
+                .append(name).append(",")
+                .append(LOC).append(",")
+                .append(CLOC).append(",")
                 .append(DC);
 
         return stringBuilder.toString();
