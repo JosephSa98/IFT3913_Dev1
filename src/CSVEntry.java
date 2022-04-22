@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 public class CSVEntry {
     private int complexityMeasure;
     private double complexityDegree;

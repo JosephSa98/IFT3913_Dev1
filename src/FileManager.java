@@ -1,9 +1,5 @@
-import java.io.File;
-import java.io.IOException;
-import java.io.RandomAccessFile;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedList;
+import java.io.*;
+import java.util.*;
 
 import static java.lang.System.exit;
 
@@ -161,7 +157,8 @@ public class FileManager{
             inputCode.close();
         } catch (IOException e) {
             e.printStackTrace();
-            System.out.println("Échec lors de l'accès au fichier");
+            System.out.println("Fichier " + path + " non trouvé");
+            return new CSVEntry(path.getAbsolutePath(), "", -1, -1, false, "", -1);
         }
 
         // System.out.println("className:" + className + "; LOC" + linesOfCode + "; CLOC:" + commentLinesOfCode);
@@ -215,10 +212,14 @@ public class FileManager{
     }
 
 
-    public static void main(String[] args){
+    public static void main(String[] args) throws IOException, InterruptedException {
 
         String path = "testClass.txt";
         String extension = "";
+
+        String folderName = "";
+        // If present, indicates that a CSV already exists and we only want to analyse changed files
+        String commitVer = "";
 
         if(args.length > 0){
             path = args[0];
@@ -226,20 +227,110 @@ public class FileManager{
         if(args.length > 1){
             extension = args[1];
         }
-
-        CSVCreator csv = new CSVCreator();
-
-        File file = new File(path);
-
-        if(file.isDirectory()){
-            CSVEntry entry = countSizePackage(file, csv, extension);
-            csv.addPackageEntry(entry);
-        } else if (file.getName().contains("." + extension)){
-            CSVEntry entry = countSizeClass(file);
-            csv.addClassEntry(entry);
+        if(args.length > 3){
+            folderName = args[2];
+            commitVer = args[3];
         }
 
-        csv.writeCSVFile();
+        if(commitVer.equals("")) {
+            CSVCreator csv = new CSVCreator();
+
+            File file = new File(path);
+
+            if (file.isDirectory()) {
+                CSVEntry entry = countSizePackage(file, csv, extension);
+                csv.addPackageEntry(entry);
+            } else if (file.getName().contains("." + extension)) {
+                CSVEntry entry = countSizeClass(file);
+                csv.addClassEntry(entry);
+            }
+
+            csv.writeCSVFile();
+        }else{
+            boolean isWindows = System.getProperty("os.name").toLowerCase().contains("win");
+            String command;
+
+            // List changed files
+            command = (isWindows ? "cmd /c " : "") + "cd " + folderName +
+                    " && git diff-tree --no-commit-id --name-only -r " + commitVer;
+            System.out.println("\n" + command);
+            final Process processList = Runtime.getRuntime().exec(command);
+
+            BufferedReader stdInput = new BufferedReader(new
+                    InputStreamReader(processList.getInputStream()));
+
+            // Fichiers à analyser
+            Stack<String> changed = new Stack<>();
+            ArrayList<CSVEntry> changedEntries = new ArrayList<>();
+
+            String line;
+            while ( (line = stdInput.readLine()) != null){
+                if(line.contains("." + extension))
+                    changed.add(folderName + "/" + line);
+                //System.out.println(line);
+            }
+
+            processList.waitFor();
+
+            while(!changed.isEmpty()){
+                File file = new File(changed.pop());
+                changedEntries.add(countSizeClass(file));
+                //System.out.println("Identified entry " + file.getName());
+            }
+
+            File oldCSV = new File("CSV/classes.csv");
+            RandomAccessFile inputCode = new RandomAccessFile(oldCSV, "r");
+
+            File newCSV = new File("CSV/classes_new.csv");
+            newCSV.createNewFile();
+            FileWriter newCsvWriter = new FileWriter(newCSV);
+
+            while((line = inputCode.readLine()) != null){
+                String filePath = line.split(",")[2];
+
+                int hit = -1;
+                for (int i = 0; i < changedEntries.size(); i++){
+                    if(filePath.equals(changedEntries.get(i).getChemin())){
+                        hit = i;
+                        break;
+                    }
+                }
+
+                if(hit >= 0){
+                    CSVEntry hitEntry = changedEntries.remove(hit);
+                    // Check if is valid
+                    // if LOC < 0, then file was removed
+                    if(hitEntry.getLOC() >= 0) {
+                        //System.out.println("Verified that " + hitEntry.getLOC()
+                        //        + " is greater than 0 for " + hitEntry.getName() + " " + (hitEntry.getLOC() >= 0));
+                        newCsvWriter.write(hitEntry.toString() + "\n");
+                        //System.out.println("Writing : " + hitEntry.toString());
+                    }
+                }else{
+                    newCsvWriter.write(line + "\n");
+
+                    //System.out.println("Writing2 : " + line);
+                }
+                //System.out.println(changedEntries.size());
+            }
+
+            // Current commit contains newly created files
+            //System.out.println("Final size: " + changedEntries.size() + "; empty:" + changedEntries.isEmpty());
+            while(!changedEntries.isEmpty()){
+                CSVEntry addEntry = changedEntries.remove(0);
+                newCsvWriter.write(addEntry.toString() + "\n");
+
+                //System.out.println("Writing3 : " + addEntry.toString() + "\n");
+            }
+
+            inputCode.close();
+            newCsvWriter.close();
+
+            // Replace old with new
+            oldCSV.delete();
+            newCSV.renameTo(oldCSV);
+
+        }
     }
 }
 
