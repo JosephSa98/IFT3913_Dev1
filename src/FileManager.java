@@ -1,7 +1,6 @@
 import java.io.*;
 import java.util.*;
 
-import static java.lang.System.exit;
 
 public class FileManager{
 
@@ -44,117 +43,125 @@ public class FileManager{
         int WMC = 0;
         int depth = 0; // depth of "{", when we pass from 1 to 2, we assume we're declaring a new function
 
+        System.out.println("Analysing file " + path);
 
         try {
-            RandomAccessFile inputCode = new RandomAccessFile(path, "r");
-            String line;
+            if(path.exists()) {
+                BufferedReader inputCode = new BufferedReader(new FileReader(path));
+                String line;
 
-            // State 0 : nothing particular
-            // State 1 : just read '/' while not isBlockComment, should look for /* or //
-            // State 2 : just read '*' while isBlockComment, should look for */
-            int state = 0;
-            boolean isBlockComment = false;
-            boolean isLiteral = false;
+                // State 0 : nothing particular
+                // State 1 : just read '/' while not isBlockComment, should look for /* or //
+                // State 2 : just read '*' while isBlockComment, should look for */
+                int state = 0;
+                boolean isBlockComment = false;
+                boolean isLiteral = false;
 
-            // To handle lines with, for example
-            // *//*
-            boolean commentLineIncremented;
-
-
-            linesLoop:
-            while((line = inputCode.readLine()) != null){
-                if(line.indexOf("public class ") == 0 && !isBlockComment && className.equals("")){
-                    className = line.substring("public class ".length()).split("\\{")[0]
-                            .split(" implements ")[0];
-                }else if(line.indexOf("public interface ") == 0 && !isBlockComment && className.equals("")){
-                    className = line.substring("public interface ".length()).split("\\{")[0]
-                            .split(" implements ")[0];
-                }else if(line.indexOf("public abstract class ") == 0 && !isBlockComment && className.equals("")){
-                    className = line.substring("public abstract class ".length()).split("\\{")[0]
-                            .split(" implements ")[0];
-                }else if(line.indexOf("public final class ") == 0 && !isBlockComment && className.equals("")){
-                    className = line.substring("public final class ".length()).split("\\{")[0]
-                            .split(" implements ")[0];
-                }else if(line.indexOf("public enum ") == 0 && !isBlockComment && className.equals("")){
-                    className = line.substring("public enum ".length()).split("\\{")[0]
-                            .split(" implements ")[0];
-                }else if(line.indexOf("package ") == 0 && !isBlockComment && packageName.equals("")){
-                    packageName = line.substring("package ".length()).split(";")[0];
-                }
+                // To handle lines with, for example
+                // *//*
+                boolean commentLineIncremented;
 
 
-                // Doesn't take into account, for example
-                // String elseelseelse = "if(while(for(case case case"
-                WMC += countMatches("if(", line);
-                WMC += countMatches("else", line);
-                WMC += countMatches("while(", line);
-                WMC += countMatches("for(", line);
-                WMC += countMatches("case ", line);
+                linesLoop:
+                while ((line = inputCode.readLine()) != null) {
+                    if (line.indexOf("public class ") == 0 && !isBlockComment && className.equals("")) {
+                        className = line.substring("public class ".length()).split("\\{")[0]
+                                .split(" implements ")[0];
+                    } else if (line.indexOf("public interface ") == 0 && !isBlockComment && className.equals("")) {
+                        className = line.substring("public interface ".length()).split("\\{")[0]
+                                .split(" implements ")[0];
+                    } else if (line.indexOf("public abstract class ") == 0 && !isBlockComment && className.equals("")) {
+                        className = line.substring("public abstract class ".length()).split("\\{")[0]
+                                .split(" implements ")[0];
+                    } else if (line.indexOf("public final class ") == 0 && !isBlockComment && className.equals("")) {
+                        className = line.substring("public final class ".length()).split("\\{")[0]
+                                .split(" implements ")[0];
+                    } else if (line.indexOf("public enum ") == 0 && !isBlockComment && className.equals("")) {
+                        className = line.substring("public enum ".length()).split("\\{")[0]
+                                .split(" implements ")[0];
+                    } else if (line.indexOf("package ") == 0 && !isBlockComment && packageName.equals("")) {
+                        packageName = line.substring("package ".length()).split(";")[0];
+                    }
 
 
-                commentLineIncremented = false;
+                    // Doesn't take into account, for example
+                    // String elseelseelse = "if(while(for(case case case"
+                    WMC += countMatches("if(", line);
+                    WMC += countMatches("else", line);
+                    WMC += countMatches("while(", line);
+                    WMC += countMatches("for(", line);
+                    WMC += countMatches("case ", line);
 
-                if(line.isBlank())
-                    continue;
 
-                for(int i = 0; i < line.length(); i++){
-                    if(line.charAt(i) == '/' && !isLiteral) {
-                        switch (state) {
-                            case 0:
-                                if(!isBlockComment)
-                                    state = 1;
-                                break;
-                            case 1:
-                                state = 0;
-                                commentLinesOfCode++;
-                                linesOfCode++;
-                                continue linesLoop;
-                            case 2:
-                                commentLinesOfCode++;
-                                commentLineIncremented = true;
-                                isBlockComment = false;
-                            default:
-                                state = 0;
-                                break;
-                        }
-                    }else if(line.charAt(i) == '*' && !isLiteral){
-                        switch (state) {
-                            case 0:
-                                if(isBlockComment)
-                                    state = 2;
-                                break;
-                            case 1:
-                                state = 0;
-                                isBlockComment = true;
-                            case 2:
-                                break;
-                            default:
-                                state = 0;
-                                break;
-                        }
-                    }else if(line.charAt(i) == '\"'){
-                        // if a line of code is, for example
-                        // System.out.println("///****///")
-                        isLiteral = !isLiteral;
-                    }else{
-                        state = 0;
-                        if(!isBlockComment && !isLiteral) {
-                            if (line.charAt(i) == '{') {
-                                if (depth == 1)
-                                    WMC++;
-                                depth++;
-                            } else if (line.charAt(i) == '}') {
-                                depth--;
+                    commentLineIncremented = false;
+
+                    if (line.isBlank())
+                        continue;
+
+                    for (int i = 0; i < line.length(); i++) {
+                        if (line.charAt(i) == '/' && !isLiteral) {
+                            switch (state) {
+                                case 0:
+                                    if (!isBlockComment)
+                                        state = 1;
+                                    break;
+                                case 1:
+                                    state = 0;
+                                    commentLinesOfCode++;
+                                    linesOfCode++;
+                                    continue linesLoop;
+                                case 2:
+                                    commentLinesOfCode++;
+                                    commentLineIncremented = true;
+                                    isBlockComment = false;
+                                default:
+                                    state = 0;
+                                    break;
+                            }
+                        } else if (line.charAt(i) == '*' && !isLiteral) {
+                            switch (state) {
+                                case 0:
+                                    if (isBlockComment)
+                                        state = 2;
+                                    break;
+                                case 1:
+                                    state = 0;
+                                    isBlockComment = true;
+                                case 2:
+                                    break;
+                                default:
+                                    state = 0;
+                                    break;
+                            }
+                        } else if (line.charAt(i) == '\"') {
+                            // if a line of code is, for example
+                            // System.out.println("///****///")
+                            isLiteral = !isLiteral;
+                        } else {
+                            state = 0;
+                            if (!isBlockComment && !isLiteral) {
+                                if (line.charAt(i) == '{') {
+                                    if (depth == 1)
+                                        WMC++;
+                                    depth++;
+                                } else if (line.charAt(i) == '}') {
+                                    depth--;
+                                }
                             }
                         }
                     }
+                    if (isBlockComment && !commentLineIncremented)
+                        commentLinesOfCode++;
+                    linesOfCode++;
+                    state = 0;
                 }
-                if(isBlockComment && !commentLineIncremented)
-                    commentLinesOfCode++;
-                linesOfCode++;
-                state = 0;
+                inputCode.close();
+            }else{
+                System.out.println("Fichier " + path + " non trouvé");
+                return new CSVEntry(path.getAbsolutePath(), "", -1, -1, false, "", -1);
             }
-            inputCode.close();
+
+
         } catch (IOException e) {
             e.printStackTrace();
             System.out.println("Fichier " + path + " non trouvé");
@@ -267,15 +274,16 @@ public class FileManager{
             while ( (line = stdInput.readLine()) != null){
                 if(line.contains("." + extension))
                     changed.add(folderName + "/" + line);
-                //System.out.println(line);
+                System.out.println(line);
             }
 
             processList.waitFor();
 
             while(!changed.isEmpty()){
                 File file = new File(changed.pop());
-                changedEntries.add(countSizeClass(file));
+                // Debug
                 //System.out.println("Identified entry " + file.getName());
+                changedEntries.add(countSizeClass(file));
             }
 
             File oldCSV = new File("CSV/classes.csv");
@@ -301,25 +309,31 @@ public class FileManager{
                     // Check if is valid
                     // if LOC < 0, then file was removed
                     if(hitEntry.getLOC() >= 0) {
+                        // Debug
                         //System.out.println("Verified that " + hitEntry.getLOC()
                         //        + " is greater than 0 for " + hitEntry.getName() + " " + (hitEntry.getLOC() >= 0));
                         newCsvWriter.write(hitEntry.toString() + "\n");
+                        // Debug
                         //System.out.println("Writing : " + hitEntry.toString());
                     }
                 }else{
                     newCsvWriter.write(line + "\n");
 
+                    // Debug
                     //System.out.println("Writing2 : " + line);
                 }
+                // Debug
                 //System.out.println(changedEntries.size());
             }
 
             // Current commit contains newly created files
+            // Debug
             //System.out.println("Final size: " + changedEntries.size() + "; empty:" + changedEntries.isEmpty());
             while(!changedEntries.isEmpty()){
                 CSVEntry addEntry = changedEntries.remove(0);
                 newCsvWriter.write(addEntry.toString() + "\n");
 
+                // Debug
                 //System.out.println("Writing3 : " + addEntry.toString() + "\n");
             }
 
